@@ -1,25 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'pages/home_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'pages/root_shell.dart';
 
-void main() {
-  runApp(const TrackiFitApp());
-}
+void main() => runApp(const TrackiFitApp());
 
 class TrackiFitApp extends StatelessWidget {
   const TrackiFitApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       title: 'TrackiFit',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        textTheme: GoogleFonts.poppinsTextTheme(),
-      ),
-      home: const HomePage(),
+      home: RootShell(),
     );
   }
 }
