@@ -18,13 +18,15 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
   Widget build(BuildContext context) {
     final uid = FirebaseAuth.instance.currentUser!.uid;
     final workoutsRef = FirebaseFirestore.instance
-        .collection('users').doc(uid).collection('workouts')
+        .collection('users')
+        .doc(uid)
+        .collection('workouts')
         .orderBy('createdAt', descending: true);
 
     return CupertinoPageScaffold(
       backgroundColor: const Color(0xFF0E0E0F), // fundo dark
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('Treinamento'),
+        middle: Text('Treinos'),
         backgroundColor: Color(0xFF161617),
         border: null,
       ),
@@ -39,42 +41,44 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
               children: [
                 // --- Ações Rápidas ---
-                const _SectionTitle('Início Rápido'),
+                const _SectionTitle('Criar'),
                 const SizedBox(height: 8),
                 Row(
                   children: [
                     Expanded(
                       child: _ActionTile(
                         icon: CupertinoIcons.doc_append,
-                        label: 'Nova Rotina',
+                        label: 'Novo Treino',
                         onTap: () => Navigator.push(
                           context,
-                          CupertinoPageRoute(builder: (_) => const WorkoutCreatePage()),
+                          CupertinoPageRoute(
+                              builder: (_) => const WorkoutCreatePage()),
                         ),
                       ),
                     ),
                     const SizedBox(width: 12),
-                    // espaço do “Explorar” removido
                     const SizedBox(width: 0),
                   ],
                 ),
                 const SizedBox(height: 20),
 
                 // --- Rotinas ---
-                const _SectionTitle('Rotinas'),
+                const _SectionTitle('Treinos'),
                 const SizedBox(height: 6),
                 GestureDetector(
                   onTap: () => setState(() => collapsed = !collapsed),
                   child: Row(
                     children: [
                       Icon(
-                        collapsed ? CupertinoIcons.chevron_right : CupertinoIcons.chevron_down,
+                        collapsed
+                            ? CupertinoIcons.chevron_right
+                            : CupertinoIcons.chevron_down,
                         size: 14,
                         color: CupertinoColors.systemGrey,
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        'Minhas Rotinas (${docs.length})',
+                        'Meus Treinos (${docs.length})',
                         style: const TextStyle(
                           color: CupertinoColors.systemGrey,
                           fontSize: 14,
@@ -95,7 +99,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                     padding: EdgeInsets.symmetric(vertical: 32),
                     child: Center(
                       child: Text(
-                        'nenhum workout criado',
+                        'Nenhum treino criado.',
                         style: TextStyle(color: CupertinoColors.inactiveGray),
                       ),
                     ),
@@ -109,11 +113,13 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                       padding: const EdgeInsets.only(bottom: 14),
                       child: _WorkoutCard(
                         title: title?.isNotEmpty == true ? title! : 'Sem título',
-                        subtitle: (note?.isNotEmpty == true) ? note! : '—',
+                        subtitle:
+                            (note?.isNotEmpty == true) ? note! : '—',
                         onOpen: () => Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (_) => WorkoutDetailPage(workoutId: d.id),
+                            builder: (_) =>
+                                WorkoutDetailPage(workoutId: d.id),
                           ),
                         ),
                         onStart: () {
@@ -121,7 +127,8 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                           Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (_) => WorkoutDetailPage(workoutId: d.id),
+                              builder: (_) =>
+                                  WorkoutDetailPage(workoutId: d.id),
                             ),
                           );
                         },
@@ -148,8 +155,10 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
             onPressed: () async {
               Navigator.pop(context);
               await FirebaseFirestore.instance
-                  .collection('users').doc(uid)
-                  .collection('workouts').doc(workoutId)
+                  .collection('users')
+                  .doc(uid)
+                  .collection('workouts')
+                  .doc(workoutId)
                   .delete();
             },
             child: const Text('Eliminar'),
@@ -184,7 +193,8 @@ class _ActionTile extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
-  const _ActionTile({required this.icon, required this.label, required this.onTap});
+  const _ActionTile(
+      {required this.icon, required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -257,7 +267,11 @@ class _WorkoutCard extends StatelessWidget {
                 CupertinoButton(
                   padding: const EdgeInsets.all(4),
                   onPressed: onMore,
-                  child: const Icon(CupertinoIcons.ellipsis_vertical, size: 18, color: CupertinoColors.systemGrey2),
+                  child: const Icon(
+                    CupertinoIcons.ellipsis_vertical,
+                    size: 18,
+                    color: CupertinoColors.systemGrey2,
+                  ),
                 )
               ],
             ),
@@ -273,12 +287,22 @@ class _WorkoutCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 14),
-            CupertinoButton(
-              color: const Color(0xFF0A84FF), // azul iOS
-              borderRadius: BorderRadius.circular(16),
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              onPressed: onStart,
-              child: const Text('Iniciar Rotina'),
+            SizedBox(
+              width: double.infinity,
+              child: CupertinoButton(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                color: const Color(0xFF0A84FF), // azul iOS
+                borderRadius: BorderRadius.circular(12),
+                onPressed: onStart,
+                child: const Text(
+                  'Começar Treino',
+                  style: TextStyle(
+                    color: CupertinoColors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

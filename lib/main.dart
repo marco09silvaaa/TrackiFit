@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'firebase_options.dart'; // criado pelo flutterfire configure
+import 'firebase_options.dart';
 
 import 'pages/root_shell.dart'; // página principal da app
-import 'pages/login_page.dart'; // cria esta página simples de login
+import 'pages/login_page.dart'; // página de login
+
+import 'populate_exercises.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +27,7 @@ class TrackiFitApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       title: 'TrackiFit',
-      home: AuthGate(), // 👇 Verifica o login antes de ir ao RootShell
+      home: AuthGate(), // Verifica o login antes de ir ao RootShell
     );
   }
 }
@@ -56,3 +58,27 @@ class AuthGate extends StatelessWidget {
     );
   }
 }
+
+
+/*Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // 🚀 Executa o populate uma vez
+  await populateExercises();
+
+  runApp(const CupertinoApp(
+    debugShowCheckedModeBanner: false,
+    home: CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.black,
+      child: Center(
+        child: Text(
+          '✅ Exercises populated successfully!',
+          style: TextStyle(color: CupertinoColors.white, fontSize: 18),
+        ),
+      ),
+    ),
+  ));
+}*/
