@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "143454106728",
+    "project_id": "trackifit",
+    "storage_bucket": "trackifit.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143454106728:android:35b50adc5a04b24849f7dd",
+        "android_client_info": {
+          "package_name": "com.example.trackifit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ9qpwGD8DTe-SnCxJO6vUHgFxx5_mRmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143454106728:android:a3e815d77d4cfb1749f7dd",
+        "android_client_info": {
+          "package_name": "com.noname.trackifit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ9qpwGD8DTe-SnCxJO6vUHgFxx5_mRmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

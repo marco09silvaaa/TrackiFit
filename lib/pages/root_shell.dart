@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
-import 'workouts_page.dart';
+import 'workouts/workouts_page.dart';
 import 'stats_page.dart';
 import 'profile_page.dart';
 
