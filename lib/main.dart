@@ -6,7 +6,7 @@ import 'firebase_options.dart';
 import 'pages/root_shell.dart'; // página principal da app
 import 'pages/login_page.dart'; // página de login
 
-import 'populate_exercises.dart';
+//import 'populate_exercises.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

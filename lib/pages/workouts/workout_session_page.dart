@@ -321,7 +321,7 @@ class _WorkoutSessionPageState extends State<WorkoutSessionPage> {
                   ],
                 );
               },
-            );
+            ),
           ),
         );
       },
